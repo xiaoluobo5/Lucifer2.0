@@ -1,6 +1,4 @@
-import os
 import sys
-from datetime import datetime
 
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
@@ -21,19 +19,19 @@ class main(QMainWindow, Ui_LuciferTool):
         self.msg = ""
         self.fixtureflag = 0
         self.fixtureLockFlag = 0
+        self.connectedIp = ''
 
     @QtCore.pyqtSlot()
     def on_ConnectFixture_clicked(self):
         if self.Fixture1.isChecked() or self.Fixture2.isChecked():
             if self.Fixture1.isChecked():
-                # ip = "192.168.50.77"
                 ip = "10.0.200.11"
             else:
                 ip = "10.0.200.21"
             if self.fixtureflag == 1:
                 # self.fixture.__del__()
                 self.ConnectFixture.setText("Connect")
-                self.handleMsgBox("{} Disconnect!".format(ip), 1)
+                self.handleMsgBox("{} Disconnect!".format(self.connectedIp), 0)
                 self.fixtureflag = 0
                 self.fixture = ""
                 self.IN_Sensor.setStyleSheet("background:rgba(255, 255, 255, 0)")
@@ -49,10 +47,11 @@ class main(QMainWindow, Ui_LuciferTool):
                     if ret == 1:
                         self.ConnectFixture.setText("Disconnect")
                         self.fixtureflag = 1
-                        self.handleMsgBox("{} connected successfully".format(ip), 1)
+                        self.connectedIp = ip
+                        self.handleMsgBox("{} Connected OK!".format(ip), 1)
                     else:
                         self.fixture = ""
-                        self.handleMsgBox("{} connected fail!".format(ip), 0)
+                        self.handleMsgBox("{} Connected fail!".format(ip), 0)
         else:
             msg = "Please select an IP address first"
             print(msg)
@@ -93,8 +92,9 @@ class main(QMainWindow, Ui_LuciferTool):
             print(self.fixture)
             ret = self.fixture.checkDUTSensor()
             if ret:
-                msg = "Dut sensor is：{}".format(str(ret, 'utf-8'))
-                self.handleMsgBox(msg)
+                msg = str(ret, 'utf-8')
+                status = 1 if msg=="dut_sensor_on" else 0
+                self.handleMsgBox(msg,status)
             else:
                 # TO DO
                 print(ret)

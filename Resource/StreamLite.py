@@ -1,5 +1,4 @@
 from Resource.cfixture import *
-import time
 
 
 class StreamLite:
@@ -27,7 +26,6 @@ class StreamLite:
     def trayUp(self):
         if self.StreamLite:
             strRecv = self.StreamLite.trayUp()
-            time.sleep(2)
         else:
             strRecv = "StreamLite Obj Didn't Create"
         return strRecv
@@ -35,7 +33,6 @@ class StreamLite:
     def trayDown(self):
         if self.StreamLite:
             strRecv = self.StreamLite.trayDown()
-            time.sleep(2)
         else:
             strRecv = "StreamLite Obj Didn't Create"
         return strRecv
@@ -43,7 +40,6 @@ class StreamLite:
     def trayIn(self):
         if self.StreamLite:
             strRecv = self.StreamLite.trayIn()
-            time.sleep(2)
         else:
             strRecv = "StreamLite Obj Didn't Create"
         return strRecv
@@ -51,7 +47,6 @@ class StreamLite:
     def trayOut(self):
         if self.StreamLite:
             strRecv = self.StreamLite.trayOut()
-            time.sleep(2)
         else:
             strRecv = "StreamLite Obj Didn't Create"
         return strRecv
