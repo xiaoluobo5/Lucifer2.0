@@ -161,7 +161,7 @@ class Ui_LuciferTool(object):
 
     def retranslateUi(self, LuciferTool):
         _translate = QtCore.QCoreApplication.translate
-        LuciferTool.setWindowTitle(_translate("LuciferTool", "LuciferTool"))
+        LuciferTool.setWindowTitle(_translate("LuciferTool", "Lucifer"))
         self.Fan_init.setText(_translate("LuciferTool", "FanInit"))
         self.label.setText(_translate("LuciferTool", "Sensor"))
         self.Fixture1.setText(_translate("LuciferTool", "10.0.200.11"))
@@ -179,7 +179,7 @@ class Ui_LuciferTool(object):
         self.CheckFanSpeed2.setText(_translate("LuciferTool", "CheckFanSpeed(7-12)"))
         self.LED_init.setText(_translate("LuciferTool", "LEDInit"))
         self.Fixture_OUT.setText(_translate("LuciferTool", "OUT"))
-        self.Version.setText(_translate("LuciferTool", "Version:2.0.2 © PRM"))
+        self.Version.setText(_translate("LuciferTool", "Version:2.0.4 © PRM"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_Fixture), _translate("LuciferTool", "Fixture"))
         self.bt_Update.setText(_translate("LuciferTool", "UpDate"))
         self.bt_FwVersion.setText(_translate("LuciferTool", "FW Version"))

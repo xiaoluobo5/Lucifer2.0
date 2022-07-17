@@ -20,6 +20,7 @@ class main(QMainWindow, Ui_LuciferTool):
         self.fixtureflag = 0
         self.fixtureLockFlag = 0
         self.connectedIp = ''
+        self.XavierUpdateFlag = 0
 
     @QtCore.pyqtSlot()
     def on_ConnectFixture_clicked(self):
@@ -256,6 +257,7 @@ class main(QMainWindow, Ui_LuciferTool):
     def on_bt_Update_clicked(self):
         ip = self.choseIp()
         if ip and self.textBrowser.filepath and self.textBrowser.fileName:
+            self.XavierUpdateFlag = 1
             self.bt_Update.setEnabled(False)
             self.bt_Reboot.setEnabled(False)
             self.thread_upDate = UpDateThreadS(ip, self.textBrowser.filepath, self.textBrowser.fileName)
@@ -266,6 +268,7 @@ class main(QMainWindow, Ui_LuciferTool):
             self.handleDisplay("Please put the file to here first!", 0)
 
     def set_bt_Update(self):
+        self.XavierUpdateFlag = 0
         self.bt_Update.setEnabled(True)
         self.bt_Reboot.setEnabled(True)
 
@@ -357,6 +360,13 @@ class main(QMainWindow, Ui_LuciferTool):
     def set_bt_RestartServer(self):
         self.bt_RestartServer.setEnabled(True)
         self.bt_Update.setEnabled(True)
+
+    def closeEvent(self, event):
+        if self.XavierUpdateFlag == 1:
+            QMessageBox.warning(self, "Warning", "<font color='red'>Xavier is updating, Don't close!<font>", QMessageBox.Cancel)
+            event.ignore()
+        else:
+            pass
 
 
 if __name__ == '__main__':
