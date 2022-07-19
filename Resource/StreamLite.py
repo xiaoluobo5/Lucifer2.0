@@ -133,7 +133,7 @@ class StreamLite:
             strRecv = self.StreamLite.checkPositionSensor()
         else:
             strRecv = "StreamLite Obj Didn't Create"
-        return str(strRecv, 'utf-8')
+        return str(strRecv, 'utf-8') if strRecv else None
 
 
 if __name__ == '__main__':

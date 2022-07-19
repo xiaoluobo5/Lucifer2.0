@@ -121,9 +121,9 @@ class main(QMainWindow, Ui_LuciferTool):
     @QtCore.pyqtSlot()
     def on_CheckFixtureSensor_clicked(self):
         if self.fixture != "":
-            ret = self.fixture.checkPositionSensor().split(";")
+            ret = self.fixture.checkPositionSensor()
             if ret:
-                print(ret)
+                ret = ret.split(";")
                 if int(ret[0]) == 1:
                     self.IN_Sensor.setStyleSheet("background:rgb(89, 255, 62)")
                 else:

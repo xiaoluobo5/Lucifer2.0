@@ -5,7 +5,7 @@ import frozenPath
 current_folder = os.path.abspath(os.path.dirname(__file__))
 # FixturePluginPath = current_folder + '/libTestC.dylib'
 app_path = frozenPath.app_path()
-# app_path = os.path.dirname(app_path)
+app_path = os.path.dirname(app_path)
 FixturePluginPath = app_path + "/Frameworks/" + "libStreamLite.dylib"
 
 libPy = ctypes.cdll.LoadLibrary(FixturePluginPath)
@@ -55,7 +55,7 @@ class LibFixture:
     def __init__(self, arg):
         arg = arg.encode("utf-8")
         self.Edev = libPy.createStreamLiteDev(arg)
-        print("Add StreamLiteDev Obj {}".format(self.Edev))
+        # print("Add StreamLiteDev Obj {}".format(self.Edev))
 
     def delObj(self):
         if self.Edev:
@@ -143,7 +143,7 @@ class LibFixture:
 
     def getFanSpeed(self, nFanId):
         if self.Edev:
-            print("------getFanSpeed---------")
+            # print("------getFanSpeed---------")
             ret = libPy.getFanSpeed(self.Edev, nFanId)
         else:
             print("pyLibEdev.getFanSpeed Error")
