@@ -179,7 +179,7 @@ class Ui_LuciferTool(object):
         self.CheckFanSpeed2.setText(_translate("LuciferTool", "CheckFanSpeed(7-12)"))
         self.LED_init.setText(_translate("LuciferTool", "LEDInit"))
         self.Fixture_OUT.setText(_translate("LuciferTool", "OUT"))
-        self.Version.setText(_translate("LuciferTool", "Version:2.0.4 © PRM"))
+        self.Version.setText(_translate("LuciferTool", "Version:2.0.5 © PRM"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_Fixture), _translate("LuciferTool", "Fixture"))
         self.bt_Update.setText(_translate("LuciferTool", "UpDate"))
         self.bt_FwVersion.setText(_translate("LuciferTool", "FW Version"))

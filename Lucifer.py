@@ -244,6 +244,8 @@ class main(QMainWindow, Ui_LuciferTool):
             msg = "<font color='red'>{}<font>".format(msg)
         elif status == 1:
             msg = "<font color='green'>{}<font>".format(msg)
+        else:
+            msg = "<font color='black'>{}<font>".format(msg)
         self.textBrowser.append(msg)
 
     def handleMsgBox(self, msg, status=-1):
@@ -251,6 +253,8 @@ class main(QMainWindow, Ui_LuciferTool):
             msg = "<font color='red'>{}<font>".format(msg)
         elif status == 1:
             msg = "<font color='green'>{}<font>".format(msg)
+        else:
+            msg = "<font color='black'>{}<font>".format(msg)
         self.MsgBox.append(msg)
 
     @QtCore.pyqtSlot()
