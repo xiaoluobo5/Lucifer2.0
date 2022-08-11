@@ -101,8 +101,8 @@ class main(QMainWindow, Ui_Lucifer):
             ret = self.fixture.checkDUTSensor()
             if ret:
                 msg = str(ret, 'utf-8')
-                status = 1 if msg=="dut_sensor_on" else 0
-                self.handleMsgBox(msg,status)
+                status = 1 if msg == "dut_sensor_on" else 0
+                self.handleMsgBox(msg, status)
             else:
                 # TO DO
                 print(ret)
@@ -168,6 +168,19 @@ class main(QMainWindow, Ui_Lucifer):
                 self.handleMsgBox(msg, 0)
 
     @QtCore.pyqtSlot()
+    def on_Fixture_UP_Close_clicked(self):
+        if self.fixture != "":
+            ret = self.fixture.setIO(13, 0)
+            if ret:
+                self.handleMsgBox(ret)
+            else:
+                msg = "Fixture resetUP Fail!"
+                self.handleMsgBox(msg, 0)
+        else:
+            msg = "Fixture not connected!"
+            self.handleMsgBox(msg, 0)
+
+    @QtCore.pyqtSlot()
     def on_Fixture_DOWN_clicked(self):
         if self.fixture != "":
             ret = self.fixture.trayDown()
@@ -176,6 +189,19 @@ class main(QMainWindow, Ui_Lucifer):
                 self.handleMsgBox(str(ret, 'utf-8'))
             else:
                 msg = "Fixture trayDown Fail!"
+                self.handleMsgBox(msg, 0)
+        else:
+            msg = "Fixture not connected!"
+            self.handleMsgBox(msg, 0)
+
+    @QtCore.pyqtSlot()
+    def on_Fixture_DOWN_Close_clicked(self):
+        if self.fixture != "":
+            ret = self.fixture.setIO(12, 0)
+            if ret:
+                self.handleMsgBox(ret)
+            else:
+                msg = "Fixture resetDown Fail!"
                 self.handleMsgBox(msg, 0)
         else:
             msg = "Fixture not connected!"
@@ -196,6 +222,19 @@ class main(QMainWindow, Ui_Lucifer):
             self.handleMsgBox(msg, 0)
 
     @QtCore.pyqtSlot()
+    def on_Fixture_IN_Close_clicked(self):
+        if self.fixture != "":
+            ret = self.fixture.setIO(10, 0)
+            if ret:
+                self.handleMsgBox(ret)
+            else:
+                msg = "Fixture resetIN Fail!"
+                self.handleMsgBox(msg, 0)
+        else:
+            msg = "Fixture not connected!"
+            self.handleMsgBox(msg, 0)
+
+    @QtCore.pyqtSlot()
     def on_Fixture_OUT_clicked(self):
         if self.fixture != "":
             ret = self.fixture.trayOut()
@@ -204,6 +243,19 @@ class main(QMainWindow, Ui_Lucifer):
                 self.handleMsgBox(str(ret, 'utf-8'))
             else:
                 msg = "Fixture Out Fail!"
+                self.handleMsgBox(msg, 0)
+        else:
+            msg = "Fixture not connected!"
+            self.handleMsgBox(msg, 0)
+
+    @QtCore.pyqtSlot()
+    def on_Fixture_OUT_Close_clicked(self):
+        if self.fixture != "":
+            ret = self.fixture.setIO(11, 0)
+            if ret:
+                self.handleMsgBox(ret)
+            else:
+                msg = "Fixture resetOUT Fail!"
                 self.handleMsgBox(msg, 0)
         else:
             msg = "Fixture not connected!"
@@ -374,7 +426,8 @@ class main(QMainWindow, Ui_Lucifer):
 
     def closeEvent(self, event):
         if self.XavierUpdateFlag == 1:
-            QMessageBox.warning(self, "Warning", "<font color='red'>Xavier is updating, Don't close!<font>", QMessageBox.Cancel)
+            QMessageBox.warning(self, "Warning", "<font color='red'>Xavier is updating, Don't close!<font>",
+                                QMessageBox.Cancel)
             event.ignore()
         else:
             pass

@@ -54,7 +54,6 @@ class StreamLite:
     def setIO(self, io, state):
         if self.StreamLite:
             strRecv = self.StreamLite.setIO(int(io), int(state))
-            print(strRecv)
         else:
             strRecv = "StreamLite Obj Didn't Create"
         return str(strRecv, 'utf-8')
