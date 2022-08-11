@@ -3,15 +3,16 @@ import sys
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 
-from GUI.LuciferTool2 import Ui_LuciferTool
-from Resource.StreamLite import StreamLite
+from GUI.LuciferTool2 import Ui_Lucifer
+from Resources.StreamLite import StreamLite
+from Resources.configLoader import getIpConfig
 from Utils.UpdateThread import UpDateThreadS
 from Utils.common import check_ip_valid
 from Utils.bt_Thread import Thread_ping, Thread_setIp, Thread_mixReboot, Thread_fwVersion, \
     Thread_RestarServer
 
 
-class main(QMainWindow, Ui_LuciferTool):
+class main(QMainWindow, Ui_Lucifer):
     def __init__(self, parent=None):
         super(main, self).__init__(parent)
         self.setupUi(self)
@@ -21,14 +22,20 @@ class main(QMainWindow, Ui_LuciferTool):
         self.fixtureLockFlag = 0
         self.connectedIp = ''
         self.XavierUpdateFlag = 0
+        self.ipConfig1, self.ipConfig2 = getIpConfig()
+        self.Xavier1.setText(self.ipConfig1)
+        self.Xavier2.setText(self.ipConfig2)
+        self.Fixture1.setText(self.ipConfig1)
+        self.Fixture2.setText(self.ipConfig2)
 
     @QtCore.pyqtSlot()
     def on_ConnectFixture_clicked(self):
         if self.Fixture1.isChecked() or self.Fixture2.isChecked():
             if self.Fixture1.isChecked():
-                ip = "10.0.200.11"
+                # ip = "192.168.50.99"
+                ip = self.ipConfig1
             else:
-                ip = "10.0.200.21"
+                ip = self.ipConfig2
             if self.fixtureflag == 1:
                 # self.fixture.__del__()
                 self.ConnectFixture.setText("Connect")
@@ -231,8 +238,8 @@ class main(QMainWindow, Ui_LuciferTool):
 
     def choseIp(self):
         if self.Xavier1.isChecked() or self.Xavier2.isChecked():
-            # return "172.16.180.130" if self.Xavier1.isChecked() else "10.0.200.21"
-            return "10.0.200.11" if self.Xavier1.isChecked() else "10.0.200.21"
+            return self.ipConfig1 if self.Xavier1.isChecked() else self.ipConfig2
+            # return "10.0.200.11" if self.Xavier1.isChecked() else "10.0.200.21"
         else:
             msg = "Please chose an ip address!"
             print(msg)

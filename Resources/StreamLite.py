@@ -1,4 +1,4 @@
-from Resource.cfixture import *
+from Resources.cfixture import *
 
 
 class StreamLite:
@@ -50,6 +50,14 @@ class StreamLite:
         else:
             strRecv = "StreamLite Obj Didn't Create"
         return strRecv
+
+    def setIO(self, io, state):
+        if self.StreamLite:
+            strRecv = self.StreamLite.setIO(int(io), int(state))
+            print(strRecv)
+        else:
+            strRecv = "StreamLite Obj Didn't Create"
+        return str(strRecv, 'utf-8')
 
     def uut1Led(self, mode):
         if self.StreamLite:
@@ -137,12 +145,18 @@ class StreamLite:
 
 
 if __name__ == '__main__':
-    fixture = StreamLite("192.168.50.77")
-    ret = fixture.checkDUTSensor()
+    fixture = StreamLite("192.168.50.9")
+    # ret = fixture.checkDUTSensor()
     # ret = fixture.checkPositionSensor().split(";")
-    print(str(ret, 'utf-8'))
+    # print(str(ret, 'utf-8'))
     # print(ret)
     # print(fixture.setFanSpeed(1, 10))
     # print(fixture.getFanSpeed(1))
     # print(fixture.setFanSpeed(1, 50))
     # print(fixture.fixtureLock("ON"))
+    # ret2 = fixture.fixtureInit()
+    ret2 = fixture.setIO(11, 1)
+    print(ret2)
+    if ret2.strip() == "done":
+        print("OKKKK")
+    print("2121")

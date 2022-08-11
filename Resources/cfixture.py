@@ -7,6 +7,7 @@ current_folder = os.path.abspath(os.path.dirname(__file__))
 app_path = frozenPath.app_path()
 app_path = os.path.dirname(app_path)
 FixturePluginPath = app_path + "/Frameworks/" + "libStreamLite.dylib"
+# FixturePluginPath = "/Users/radish/Library/Caches/JetBrains/AppCode2021.1/DerivedData/StreamLite-bahsvlskcdwqemelworacmdnxqxp/Build/Products/Debug/libStreamLite.dylib"
 
 libPy = ctypes.cdll.LoadLibrary(FixturePluginPath)
 
@@ -29,6 +30,9 @@ libPy.trayIn.restype = ctypes.c_char_p
 
 libPy.trayOut.argtypes = [ctypes.c_void_p]
 libPy.trayOut.restype = ctypes.c_char_p
+
+libPy.setIO.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int]
+libPy.setIO.restype = ctypes.c_char_p
 
 libPy.fixtureLock.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
 libPy.fixtureLock.restype = ctypes.c_char_p
@@ -111,6 +115,14 @@ class LibFixture:
             ret = libPy.trayOut(self.Edev)
         else:
             print("pyLibEdev.trayOut Error")
+            ret = -1
+        return ret
+
+    def setIO(self, io, state):
+        if self.Edev:
+            ret = libPy.setIO(self.Edev, io, state)
+        else:
+            print("pyLibEdev.setIO Error")
             ret = -1
         return ret
 
